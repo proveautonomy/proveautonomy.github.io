@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'zh-Hant' }}">
+  {% capture theme_head %}{% include head.html %}{% endcapture %}
+  {% capture article_styles %}<link rel="stylesheet" href="{{ '/assets/css/article.css' | relative_url }}"></head>{% endcapture %}
+  {{ theme_head | replace: '</head>', article_styles }}
+  <body class="article-page">
+    <a class="skip-link" href="#article-content">跳至文章內容</a>
+    <div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
+    <header class="brand-header">
+      <a class="brand-link" href="{{ '/' | relative_url }}" aria-label="ProveAutonomy 首頁">
+        <img src="{{ '/assets/images/logo-banner.png' | relative_url }}" alt="ProveAutonomy" width="2172" height="724">
+      </a>
+      <a class="back-link" href="{{ '/' | relative_url }}">所有文章 <span aria-hidden="true">↗</span></a>
+    </header>
+    <main id="main-content">
+      <article itemscope itemtype="https://schema.org/BlogPosting">
+        <header class="article-hero">
+          <div class="hero-inner">
+            <div class="eyebrow"><span aria-hidden="true"></span> PROVEAUTONOMY / FIELD NOTES</div>
+            <div class="hero-category">{{ page.categories | first | default: 'Autonomous Systems' | escape }}</div>
+            <h1 itemprop="headline">{{ page.title | escape }}</h1>
+            {% if page.description %}<p class="hero-description" itemprop="description">{{ page.description | escape }}</p>{% endif %}
+            <div class="article-meta">
+              <span itemprop="author">{{ page.author | default: site.title | escape }}</span>
+              <span aria-hidden="true">/</span>
+              <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: '%Y.%m.%d' }}</time>
+            </div>
+            {% if page.tags.size > 0 %}<ul class="article-tags" aria-label="文章主題">{% for tag in page.tags %}<li>{{ tag | escape }}</li>{% endfor %}</ul>{% endif %}
+          </div>
+        </header>
+        <div class="article-grid">
+          <aside class="article-sidebar" id="article-sidebar" hidden>
+            <nav aria-label="文章目錄">
+              <p class="sidebar-label">ON THIS PAGE <span>文章導覽</span></p>
+              <ol id="article-toc"></ol>
+              <a class="top-link" href="#main-content">回到文章頂端 ↑</a>
+            </nav>
+          </aside>
+          <div class="article-body" id="article-content" itemprop="articleBody" tabindex="-1">{{ content }}</div>
+        </div>
+        <footer class="article-signoff">
+          <img src="{{ '/assets/images/logo-proveautonomy.png' | relative_url }}" alt="" width="1280" height="1280" loading="lazy">
+          <div><p class="signoff-name">ProveAutonomy</p><p>Test. Measure. Prove Autonomy.</p></div>
+          <a href="{{ '/' | relative_url }}">探索更多文章 <span aria-hidden="true">→</span></a>
+        </footer>
+      </article>
+    </main>
+    <script src="{{ '/assets/js/article.js' | relative_url }}" defer></script>
+  </body>
+</html>
