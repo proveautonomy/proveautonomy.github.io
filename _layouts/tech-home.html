@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'zh-Hant' }}">
+  {% capture theme_head %}{% include head.html %}{% endcapture %}
+  {% capture brand_styles %}<link rel="stylesheet" href="{{ '/assets/css/article.css' | relative_url }}"><link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}"></head>{% endcapture %}
+  {{ theme_head | replace: '</head>', brand_styles }}
+  <body class="article-page home-page">
+    <a class="skip-link" href="#main-content">跳至首頁內容</a>
+    <header class="brand-header">
+      <a class="brand-link" href="{{ '/' | relative_url }}" aria-label="ProveAutonomy 首頁">
+        <img src="{{ '/assets/images/logo-banner.png' | relative_url }}" alt="ProveAutonomy" width="2172" height="724">
+      </a>
+      <a class="back-link" href="#latest-articles">最新文章 <span aria-hidden="true">↘</span></a>
+    </header>
+    <main id="main-content" tabindex="-1">
+      <section class="article-hero" aria-labelledby="home-title">
+        <div class="hero-inner home-hero-inner">
+          <div>
+            <div class="eyebrow"><span aria-hidden="true"></span> PROVEAUTONOMY / ENGINEERING NOTES</div>
+            <div class="hero-category">Autonomous Systems · Robot Validation</div>
+            <h1 id="home-title">Test. Measure.<br><span>Prove Autonomy.</span></h1>
+            <div class="home-intro">{{ content }}</div>
+            <a class="home-cta" href="#latest-articles">閱讀最新文章 <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="home-brand-panel" aria-hidden="true">
+            <img src="{{ '/assets/images/logo-proveautonomy.png' | relative_url }}" alt="" width="1280" height="1280">
+            <p>TEST → MEASURE → VALIDATE</p>
+          </div>
+        </div>
+      </section>
+      <section class="home-section" aria-labelledby="topics-title">
+        <div class="home-section-heading"><p class="section-kicker">AREAS OF EXPLORATION</p><h2 id="topics-title">探索主題</h2></div>
+        <ul class="home-topics">{% for topic in page.topics %}<li>{{ topic | escape }}</li>{% endfor %}</ul>
+      </section>
+      <section class="home-section latest-section" id="latest-articles" aria-labelledby="latest-title">
+        <div class="home-section-heading"><p class="section-kicker">LATEST FIELD NOTES</p><h2 id="latest-title">最新文章</h2></div>
+        <div class="post-cards">
+          {% for post in site.posts %}
+          <article class="post-card">
+            <div class="card-meta"><span>{{ post.categories | first | default: 'Engineering Notes' | escape }}</span><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time></div>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+            <p class="card-description">{{ post.description | default: post.excerpt | strip_html | truncate: 180 | escape }}</p>
+            <ul class="card-tags" aria-label="文章主題">{% for tag in post.tags limit: 4 %}<li>{{ tag | escape }}</li>{% endfor %}</ul>
+            <a class="card-read-link" href="{{ post.url | relative_url }}" aria-label="閱讀文章：{{ post.title | escape }}">閱讀文章 <span aria-hidden="true">↗</span></a>
+          </article>
+          {% else %}<p>文章整理中，敬請期待。</p>{% endfor %}
+        </div>
+      </section>
+    </main>
+    <footer class="article-signoff">
+      <img src="{{ '/assets/images/logo-proveautonomy.png' | relative_url }}" alt="" width="1280" height="1280" loading="lazy">
+      <div><p class="signoff-name">ProveAutonomy</p><p>Test. Measure. Prove Autonomy.</p></div>
+      <a href="#main-content">回到頂端 ↑</a>
+    </footer>
+  </body>
+</html>

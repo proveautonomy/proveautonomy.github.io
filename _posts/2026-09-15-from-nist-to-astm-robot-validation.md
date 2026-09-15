@@ -1,5 +1,6 @@
 ---
 layout: post
+math: true
 title: "從 NIST 到 ASTM：如何建立一套自主移動機器人的驗測方法？"
 date: 2026-09-15
 author: ProveAutonomy
@@ -286,17 +287,17 @@ Goal
 
 取決於不同的測試環境與精度需求。
 
-假設真值位置為 \((x_t, y_t)\)，機器人估測位置為 \((\hat{x}_t, \hat{y}_t)\)，則單點位置誤差可表示為：
+假設真值位置為 $$(x_t, y_t)$$，機器人估測位置為 $$(\hat{x}_t, \hat{y}_t)$$，則單點位置誤差可表示為：
 
-\[
+$$
 e_t = \sqrt{(x_t-\hat{x}_t)^2+(y_t-\hat{y}_t)^2}
-\]
+$$
 
 進一步可計算：
 
-\[
+$$
 RMSE = \sqrt{\frac{1}{N}\sum_{t=1}^{N} e_t^2}
-\]
+$$
 
 這時我們討論的就不再是：
 
